@@ -6,6 +6,12 @@
  * Time: 06:10 PM
  */
 
+$datosFactura = explode("&", $_POST["qr"]);
+$respuesta = array();
+$respuesta['rfcEmisor'] = str_replace("re=", "", $datosFactura[0]);
+$respuesta['rfcReceptor'] = str_replace("rr=", "", $datosFactura[1]);
+$respuesta['total'] = str_replace("tt=", "", $datosFactura[2]);
+$respuesta['id'] = str_replace("id=", "", $datosFactura[3]);
 
 try {
     $client = new SoapClient("https://consultaqr.facturaelectronica.sat.gob.mx/ConsultaCFDIService.svc?wsdl");
@@ -13,12 +19,12 @@ try {
     echo 'Excepción capturada: ',  $e->getMessage(), "\n";
 }
 
-$cadena='re=' . $_POST["rfcEmisor"] . '&rr=' . $_POST["rfcReceptor"] . '&tt=' . $_POST["total"] . '&id=' . $_POST["id"] . '';
-
 $param = array(
-    'expresionImpresa'=>$cadena
+    'expresionImpresa' => $_POST["qr"]
 );
 
-$valores = $client->Consulta($param);
+$valores = json_decode(json_encode($client->Consulta($param)), true);
+$respuesta['estatus'] = $valores["ConsultaResult"]["CodigoEstatus"];
+$respuesta['estado'] = $valores["ConsultaResult"]["Estado"];
 
-echo json_encode($valores);
+echo json_encode($respuesta);
