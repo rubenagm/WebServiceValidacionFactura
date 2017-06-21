@@ -13,7 +13,7 @@ try {
     echo 'Excepción capturada: ',  $e->getMessage(), "\n";
 }
 
-$cadena="re=MSE1701315J6&rr=AUSD780424L24&tt=15.00&id=3FD65BFB-8973-4B0C-9853-46DA8A4399A7";
+$cadena='re=' . $_POST["rfcEmisor"] . '&rr=' . $_POST["rfcReceptor"] . '&tt=' . $_POST["total"] . '&id=' . $_POST["id"] . '';
 
 $param = array(
     'expresionImpresa'=>$cadena
