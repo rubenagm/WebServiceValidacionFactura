@@ -21,4 +21,4 @@ $param = array(
 
 $valores = $client->Consulta($param);
 
-print_r($valores);
+echo json_encode($valores);
