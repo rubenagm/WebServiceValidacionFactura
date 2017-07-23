@@ -5,13 +5,14 @@
  * Date: 19/04/2017
  * Time: 06:10 PM
  */
-
+error_reporting(0);
 $datosFactura = explode("&", $_POST["qr"]);
 $respuesta = array();
-$respuesta['rfcEmisor'] = str_replace("re=", "", $datosFactura[0]);
+$respuesta['rfcEmisor'] = str_replace("?", "", str_replace("re=", "", $datosFactura[0]));
 $respuesta['rfcReceptor'] = str_replace("rr=", "", $datosFactura[1]);
 $respuesta['total'] = str_replace("tt=", "", $datosFactura[2]);
 $respuesta['id'] = str_replace("id=", "", $datosFactura[3]);
+$respuesta['fechaVerificacion'] = date("d-m-Y");
 
 try {
     $client = new SoapClient("https://consultaqr.facturaelectronica.sat.gob.mx/ConsultaCFDIService.svc?wsdl");
