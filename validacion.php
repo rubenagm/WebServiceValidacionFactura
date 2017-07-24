@@ -12,7 +12,7 @@ $respuesta['rfcEmisor'] = str_replace("?", "", str_replace("re=", "", $datosFact
 $respuesta['rfcReceptor'] = str_replace("rr=", "", $datosFactura[1]);
 $respuesta['total'] = str_replace("tt=", "", $datosFactura[2]);
 $respuesta['id'] = str_replace("id=", "", $datosFactura[3]);
-$respuesta['fechaVerificacion'] = date("d-m-Y");
+$respuesta['fechaVerificacion'] = date("d-m-Y h:i:s");
 
 try {
     $client = new SoapClient("https://consultaqr.facturaelectronica.sat.gob.mx/ConsultaCFDIService.svc?wsdl");
