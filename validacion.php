@@ -6,6 +6,7 @@
  * Time: 06:10 PM
  */
 error_reporting(0);
+date_default_timezone_set("America/Mexico_City");
 $datosFactura = explode("&", $_POST["qr"]);
 $respuesta = array();
 $respuesta['rfcEmisor'] = str_replace("?", "", str_replace("re=", "", $datosFactura[0]));
