@@ -28,5 +28,6 @@ $param = array(
 $valores = json_decode(json_encode($client->Consulta($param)), true);
 $respuesta['estatus'] = $valores["ConsultaResult"]["CodigoEstatus"];
 $respuesta['estado'] = $valores["ConsultaResult"]["Estado"];
+$respuesta['valida'] = ($respuesta['estado'] == "Vigente");
 
 echo json_encode($respuesta);
